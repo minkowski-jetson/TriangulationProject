@@ -9,7 +9,6 @@ using namespace UTILS;
 Eigen::IOFormat HeavyFmt(Eigen::FullPrecision, 0, ", ", ";\n", "[", "]", "[", "]");
 
 
-
 int main()
 {
     UTILS::Triangulation testObj;
@@ -59,21 +58,13 @@ int main()
         a * (yrange(1) - yrange(0)) + yrange(0),
         a * (zrange(1) - zrange(0)) + zrange(0);
         
-        // vector<Vec3f> centers(npts);
-        // vector<Vec3f> directs(npts);
+
         vector<Vec2f> pts(npts);
         for (int i = 0; i < npts; i++)
         {
             Vec3f x = poses[i] * X.homogeneous();
             pts[i] = x.block<2, 1>(0, 0) / x(2);
-            // Mat4f M;
-            // M.block<3, 4>(0, 0) = poses[i];
-            // M.block<1, 4>(3, 0).setZero();
-            // Vec4f c;
-            // UTILS::nullspace<Mat4f, Vec4f>(&M, &c);
-            // centers[i] = c.block<3, 1>(0, 0) / c(3);
-            // directs[i] = poses[i].block<1, 3>(2, 0);
-            // directs[i] /= directs[i].norm();
+
         }
         
         Vec3f X_est;
@@ -82,21 +73,14 @@ int main()
         // std::cout << "pose 0" << std::endl;
         // std::cout << poses[0].format(HeavyFmt) << std::endl;
 
-        // triangulate_linear(poses, pts, X_est);
         err[0] += (X - X_est).dot(X - X_est);
-        
-        // // midpoint triangulation
-        // triangulate_midpoint(centers, directs, pts, X_est);
-        // err[1] += (X - X_est).dot(X - X_est);
         
         // nonlinear triangulation
         testObj.Sampson(poses, pts, X_est);
-        // triangulate_nonlinear(poses, pts, X_est);
         err[2] += (X - X_est).dot(X - X_est);
     }
 
     std::cout << "linear triangulation: " << err[0] / 100 << std::endl;
-    // // cout << "midpoint triangulation: " << err[1] / 100 << endl;
     std::cout << "nonlinear triangulation: " << err[2] / 100 << std::endl;
 
     return 0;
