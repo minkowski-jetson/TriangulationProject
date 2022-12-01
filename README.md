@@ -14,8 +14,8 @@ You can change the cmake version and Eigen version in CMakeLists.txt and try to 
 Use the standard cmake commands to use the repository with the given test file in Ubuntu:
 
 from the TriangulationProject folder
-mkdir build && cd build
-cmake ..
-cmake --build . or make -j#
+mkdir build && cd build  
+cmake ..  
+cmake --build . or make -j#  
 
 ./TriangulationProject to run
