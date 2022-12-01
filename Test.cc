@@ -62,7 +62,7 @@ int main()
         // vector<Vec3f> centers(npts);
         // vector<Vec3f> directs(npts);
         vector<Vec2f> pts(npts);
-        for (int i = 0; i < npts; ++i)
+        for (int i = 0; i < npts; i++)
         {
             Vec3f x = poses[i] * X.homogeneous();
             pts[i] = x.block<2, 1>(0, 0) / x(2);
