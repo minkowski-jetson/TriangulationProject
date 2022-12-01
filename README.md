@@ -11,7 +11,7 @@ cmake above 3.0.0 and Eigen 3.4
 
 You can change the cmake version and Eigen version in CMakeLists.txt and try to build if you have different versions.
 
-Use the standard cmake commands to use the repository with the given test file:
+Use the standard cmake commands to use the repository with the given test file in Ubuntu:
 
 from the TriangulationProject folder
 mkdir build && cd build
